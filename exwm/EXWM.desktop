@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=emacs
+Comment=EXWM + Polybar
+Exec=sh /home/bruno/.exwmrc
+TryExec=sh
+Type=Application
+X-LightDM-DesktopName=exwm
+DesktopNames=exwm

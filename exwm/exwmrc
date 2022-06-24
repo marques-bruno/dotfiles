@@ -1,0 +1,12 @@
+#!/bin/sh
+# Set the screen DPI (uncomment this if needed!)
+# xrdb ~/.emacs.d/exwm/Xresources
+
+# Run the screen compositor
+picom &
+
+# Swap Capslock with Esc
+setxkbmap -option "caps:swapescape"
+
+# Fire it up
+exec dbus-launch --exit-with-session emacs -mm --debug-init
