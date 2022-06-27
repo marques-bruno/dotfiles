@@ -1,0 +1,12 @@
+[user]
+	name = marques-bruno
+	email = bmarques68@gmail.com
+[alias]
+	st = status -sb
+	ci = commit -m
+	p = push
+	rv = remote -v
+	se = !git rev-list --all | xargs git grep -F
+	graphlog = log --all --decorate --oneline --graph
+	conflicts = diff --name-only --diff-filter=U
+	
