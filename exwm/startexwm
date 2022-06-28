@@ -8,5 +8,6 @@ picom &
 # Swap Capslock with Esc
 setxkbmap -option "caps:swapescape"
 
+/home/bruno/.config/polybar/launch.sh --hack &
 # Fire it up
 exec dbus-launch --exit-with-session emacs -mm --debug-init
