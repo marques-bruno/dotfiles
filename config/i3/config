@@ -205,7 +205,7 @@ default_border pixel 1
 #}
 
 assign [class='Navigator'] $ws1
-exec_always compton -f
+exec_always picom -f
 exec sh ~/.screenlayout/newlayout.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh --hack
 exec feh --bg-scale /usr/local/share/backgrounds/archlinux.jpg
