@@ -208,8 +208,7 @@ assign [class='Navigator'] $ws1
 exec_always picom -f
 exec sh ~/.screenlayout/newlayout.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh --hack
-exec feh --bg-scale /usr/local/share/backgrounds/archlinux.jpg
-exec sleep 1
+exec feh --no-fehbg --bg-scale /usr/local/share/backgrounds/archlinux.jpg&
 exec_always setxkbmap -option "caps:swapescape"
 exec --no-startup-id i3-msg 'workspace $ws1; exec firefox'
 exec --no-startup-id i3-msg 'workspace $ws2; exec kitty'
