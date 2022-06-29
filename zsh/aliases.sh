@@ -96,14 +96,6 @@ alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pac
 #mounting the folder Public for exchange between host and guest on virtualbox
 alias vbm="sudo /usr/local/bin/arcolinux-vbox-share"
 
-#setopt
-setopt -s autocd # change to named directory
-setopt -s cdspell # autocorrects cd misspellings
-setopt -s cmdhist # save multi-line commands in history as single line
-setopt -s dotglob
-setopt -s histappend # do not overwrite history
-setopt -s expand_aliases # expand aliases
-
 #youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
 alias yta-best="youtube-dl --extract-audio --audio-format best "
