@@ -185,7 +185,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #005d5d #000000 #2e9ef4   #285577
+client.focused          #4c7899 #005d5d #000000 #005d5d   #285577
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
 client.unfocused        #333333 #2b313c #888888 #292d2e   #2b313c
 client.urgent           #2f343a #090000 #ffffff #900000   #900000
@@ -208,7 +208,7 @@ assign [class='Navigator'] $ws1
 exec_always picom -f
 exec sh ~/.screenlayout/newlayout.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh --hack
-exec feh --no-fehbg --bg-scale /usr/local/share/backgrounds/archlinux.jpg&
 exec_always setxkbmap -option "caps:swapescape"
 exec --no-startup-id i3-msg 'workspace $ws1; exec firefox'
 exec --no-startup-id i3-msg 'workspace $ws2; exec kitty'
+exec_always feh --no-fehbg --bg-scale /usr/local/share/backgrounds/archlinux.jpg&
