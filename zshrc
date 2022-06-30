@@ -141,4 +141,4 @@ alias ls="lsd"
 source ~/.zsh/aliases.sh
 source ~/.zsh/cpp.sh
 source ~/.zsh/extractor.sh
-source ~/.zsh/vimify.sh
+source ~/.zsh/config.sh

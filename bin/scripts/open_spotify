@@ -1,0 +1,12 @@
+#!/bin/bash
+
+spotify_launched=$(pgrep -c spotify)
+
+echo "<$spotify_launched>"
+
+if [[ $spotify_launched -gt 1 ]]; then
+	wmctrl -a Spotify
+else
+	i3-msg 'workspace 9; exec /usr/bin/spotify'
+fi
+
