@@ -14,7 +14,7 @@ rofi_command="rofi -theme $dir/powermenu.rasi"
 shutdown=" Shutdown"
 reboot=" Restart"
 lock=" Lock"
-suspend=" Sleep"
+hibernate=" Hibernate"
 logout=" Logout"
 noconfirm="true"
 
@@ -33,7 +33,7 @@ msg() {
 }
 
 # Variable passed to rofi
-options="$lock\n$suspend\n$logout\n$reboot\n$shutdown"
+options="$lock\n$hibernate\n$logout\n$reboot\n$shutdown"
 
 chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 0)"
 
@@ -77,11 +77,11 @@ case $chosen in
 			betterlockscreen -l
 		fi
         ;;
-    $suspend)
+    $hibernate)
 		if [[ $ans == "yes" ]]; then
 			mpc -q pause
 			amixer set Master mute
-			systemctl suspend
+			systemctl hibernate
 		elif [[ $ans == "no" ]]; then
 			exit 0
         	else

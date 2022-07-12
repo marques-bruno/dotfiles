@@ -1,3 +1,9 @@
+# Kitty terminal needs to upload terminfo data to the server
+alias sskitty='kitty +kitten ssh'
+
+# run archey3
+alias quick='archey3 -c cyan'
+
 #list
 alias ls='ls --color=auto'
 alias la='ls -a'
