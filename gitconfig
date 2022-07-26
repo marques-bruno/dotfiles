@@ -5,6 +5,7 @@
 	st = status -sb
 	ci = commit -m
 	p = push
+	l = log --oneline
 	rv = remote -v
 	se = !git rev-list --all | xargs git grep -F
 	graphlog = log --all --decorate --oneline --graph
