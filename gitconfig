@@ -1,6 +1,10 @@
 [user]
 	name = marques-bruno
 	email = bmarques68@gmail.com
+
+[core]
+	editor = vim
+
 [alias]
 	st = status -sb
 	ci = commit -m
