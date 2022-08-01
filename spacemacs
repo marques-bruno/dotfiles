@@ -36,6 +36,8 @@ This function should only modify configuration layer settings."
      (c-c++ :variables
             c-c++-backend 'lsp-clangd
             c-c++-dap-adapters '(dap-lldb dap-cpptools))
+     (cmake :variables
+	cmake-backend 'lsp)
      yaml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.

@@ -1,8 +1,13 @@
+## Mounting host_shared folder (disable in non-VM environments)
+#alias mount_share='sudo mount -t vboxsf -o gid=vboxsf cerberus /host_shared'
+
 # Kitty terminal needs to upload terminfo data to the server
 alias sskitty='kitty +kitten ssh'
 
 # run archey3
-alias quick='archey3 -c cyan'
+alias archey='archey3 -c cyan'
+
+alias ec='emacsclient --create-frame'
 
 #list
 alias ls='ls --color=auto'
