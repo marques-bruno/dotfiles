@@ -228,6 +228,8 @@ default_border pixel 1
 
 assign [class='Navigator'] $ws1
 exec sh ~/.screenlayout/newlayout.sh
+## Enables virtualbox additions on the guest (e.g. bidirectional clipboard)
+exec --no-startup-id VBoxClient-all
 exec_always  ~/.bin/scripts/fix_kbd.sh 
 exec_always --no-startup-id /usr/bin/pipewire
 exec_always --no-startup-id /usr/bin/pipewire-pulse
@@ -238,5 +240,5 @@ exec --no-startup-id /usr/bin/emacs --daemon
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh --hack
 exec_always picom -f
 exec --no-startup-id cd ~/projects/auzia-conky/ && conky -c conkyrc
-exec_always feh --no-fehbg --bg-center --bg-fill /usr/local/share/backgrounds/archlinux01_low.jpg
+exec_always feh --no-fehbg --bg-center --bg-fill --bg-scale /usr/local/share/backgrounds/archlinux01_low.jpg
 
