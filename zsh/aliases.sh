@@ -2,7 +2,7 @@
 alias mount_share='sudo mount -t vboxsf -o gid=vboxsf cerberus /host_shared'
 
 # Kitty terminal needs to upload terminfo data to the server
-alias sskitty='kitty +kitten ssh'
+alias ssh='kitty +kitten ssh'
 
 # run archey3
 alias archey='archey3 -c cyan'
@@ -58,6 +58,7 @@ alias pacman='sudo pacman --color auto'
 alias update='sudo pacman -Syu'
 
 # yay as aur helper - updates everything
+alias yaya="yay --editmenu"
 alias pksyua="yay -Syu --noconfirm"
 alias upall="yay -Syu --noconfirm"
 

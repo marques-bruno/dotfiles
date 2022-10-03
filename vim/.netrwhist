@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/bruno/ansible_git/roles/common/tasks'
+let g:netrw_dirhist_1='/home/bruno/dev/plop/tools/dockers/fota_tests'
+let g:netrw_dirhist_0='/home/bruno/dev/plop/tools/dockers'
+let g:netrw_dirhist_9='/home/bruno/dev/plop/tools/dockers/fota_tests/scripts'
+let g:netrw_dirhist_8='/home/bruno/dev/plop/tools/dockers/someip_services/docker_scripts'
+let g:netrw_dirhist_7='/home/bruno/dev/proj5705_tools/new_scripts'
+let g:netrw_dirhist_6='/home/bruno/dev/proj5705_tools'
+let g:netrw_dirhist_5='/home/bruno/dev/proj5705_tools/scripts'
+let g:netrw_dirhist_4='/home/bruno/dev/proj5705_tools'
+let g:netrw_dirhist_3='/home/bruno/dev/proj5705_tools/repoScript'

@@ -227,7 +227,10 @@ default_border pixel 1
 #}
 
 assign [class='Navigator'] $ws1
-exec sh ~/.screenlayout/newlayout.sh
+
+exec sh ~/.bin/scripts/run_ssh-agent.sh
+
+exec_always sh ~/.screenlayout/newlayout.sh
 ## Enables virtualbox additions on the guest (e.g. bidirectional clipboard)
 exec --no-startup-id VBoxClient-all
 exec_always  ~/.bin/scripts/fix_kbd.sh 

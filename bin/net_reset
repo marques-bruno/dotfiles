@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -xe 
+systemctl stop docker.service
+systemctl stop systemd-resolved.service
+systemctl restart NetworkManager.service
+systemctl start systemd-resolved.service
+systemctl start docker.service
