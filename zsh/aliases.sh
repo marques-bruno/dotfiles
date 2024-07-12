@@ -1,9 +1,7 @@
 ## Mounting host_shared folder (disable in non-VM environments)
 #alias mount_share='sudo mount -t vboxsf -o gid=vboxsf cerberus /host_shared'
 
-# Kitty terminal needs to upload terminfo data to the server
-alias sskitty='kitty +kitten ssh'
-
+alias vim='nvim'
 # run archey3
 alias archey='archey3 -c cyan'
 
@@ -132,20 +130,15 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
-#vim for important configuration files
+#nvim for important configuration files
 #know what you do in these files
-alias editdm="sudo vim /etc/lightdm/lightdm.conf"
-alias editpacman="sudo vim /etc/pacman.conf"
-alias editgrub="sudo vim /etc/default/grub"
-alias grubconf="sudo vim /boot/grub/grub.cfg"
-alias editmkinitcpio="sudo vim /etc/mkinitcpio.conf"
-alias editmirrors="sudo vim /etc/pacman.d/mirrorlist"
-alias bls="betterlockscreen -u /usr/share/backgrounds/arcolinux/"
-alias kittyconf="vim ~/.config/kitty/kitty.conf"
-alias zshconf="vim ~/.zshrc"
-alias polyconf="vim ~/.config/polybar/config"
-alias spacemacsconf="vim ~/.spacemacs"
-
+alias editpacman="sudo nvim /etc/pacman.conf"
+alias editgrub="sudo nvim /etc/default/grub"
+alias grubconf="sudo nvim /boot/grub/grub.cfg"
+alias editmkinitcpio="sudo nvim /etc/mkinitcpio.conf"
+alias editmirrors="sudo nvim /etc/pacman.d/mirrorlist"
+alias zshconfig="nvim $HOME/.zshrc"
+alias nvimconfig="nvim $HOME/.config/nvim/init.lua"
 #gpg
 #verify signature for isos
 alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
