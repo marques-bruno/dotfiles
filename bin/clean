@@ -1,6 +1,0 @@
-#!/bin/bash
-
-rm -vf *~
-rm -vf *#
-rm -vf .*~
-rm -vf .*#
