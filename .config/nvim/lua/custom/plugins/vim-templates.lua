@@ -1,3 +1,9 @@
+--[[
+@author		: marques-bruno (bmarques68@gmail.com)
+@created	: 26/07/2024
+@filename	: vim-templates.lua
+]]
+
 local function get_output(cmd)
   local handle = io.popen(cmd)
   if handle ~= nil then

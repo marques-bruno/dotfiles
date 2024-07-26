@@ -35,14 +35,20 @@ return {
         header = vim.split(logo, '\n'),
         -- stylua: ignore
         center = {
-          { action = "<cmd>enew<cr>",                                  desc = " New File",        icon = " ", key = "n" },
-          { action = 'Telescope oldfiles',                             desc = " Recent Files",    icon = " ", key = "r" },
-          { action = 'Telescope live_grep',                            desc = " Find Text In Workspace",       icon = " ", key = "g" },
-          { action = 'Telescope find_files',                           desc = " Find File In Workspace",       icon = " ", key = "g" },
-          { action = '<cmd>e $HOME/nvim/',                             desc = " Config",          icon = " ", key = "c" },
-          { action = 'Autosession search',                             desc = " Restore Session", icon = " ", key = "s" },
-          { action = "Lazy",                                           desc = " Lazy",            icon = "󰒲 ", key = "l" },
-          { action = function() vim.api.nvim_input("<cmd>qa<cr>") end, desc = " Quit",            icon = " ", key = "q" },
+          { action = function()
+              vim.api.nvim_input("<cmd>enew<cr>")
+            end,                                desc = " New File",               icon = " ", key = "n" },
+          { action = 'Telescope oldfiles',      desc = " Recent Files",           icon = " ", key = "r" },
+          { action = 'Telescope live_grep',     desc = " Find Text In Workspace", icon = " ", key = "g" },
+          { action = 'Telescope find_files',    desc = " Find File In Workspace", icon = " ", key = "f" },
+          { action = function()
+              vim.api.nvim_input('<cmd>e $HOME/.config/nvim/init.lua<cr>')
+            end,                                desc = " Config",                 icon = " ", key = "c" },
+          { action = 'Autosession search',      desc = " Restore Session",        icon = " ", key = "s" },
+          { action = "Lazy",                    desc = " Lazy",                   icon = "󰒲 ", key = "l" },
+          { action = function()
+              vim.api.nvim_input("<cmd>qa<cr>")
+            end,                                desc = " Quit",                   icon = " ", key = "q" },
         },
       },
     }
