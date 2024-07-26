@@ -2,10 +2,10 @@
 #alias mount_share='sudo mount -t vboxsf -o gid=vboxsf cerberus /host_shared'
 
 alias vim='nvim'
-# run archey3
-alias archey='archey3 -c cyan'
+alias vi='vim'
 
-alias ec='emacsclient --create-frame'
+# run archey3
+alias archey='archey4 -c cyan'
 
 #list
 alias ls='ls --color=auto'
@@ -82,9 +82,6 @@ alias update-fc='sudo fc-cache -fv'
 #switch between bash and zsh
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
-
-#quickly kill conkies
-alias kc='killall conky'
 
 #hardware info --short
 alias hw="hwinfo --short"

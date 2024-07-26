@@ -3,7 +3,7 @@
 	email = bmarques68@gmail.com
 
 [core]
-	editor = vim
+	editor = nvim
 
 [alias]
 	st = status -sb
