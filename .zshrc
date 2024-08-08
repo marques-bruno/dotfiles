@@ -25,6 +25,9 @@ eval "$(fzf --zsh)"
 # Enable zoxide in zsh
 eval "$(zoxide init --cmd cd zsh)"
 
+# Enable thefuck: type fuck to suggest corrections for mistyped commands
+eval $(thefuck --alias)
+
 # Add syntax highlighting
 zinit light zsh-users/zsh-syntax-highlighting
 
@@ -80,6 +83,7 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-alias ls='ls --color'
-alias e='nvim'
-alias c='clear'
+source $HOME/.zsh/aliases.sh
+source $HOME/.zsh/config.sh
+source $HOME/.zsh/extractor.sh
+source $HOME/.zsh/cpp.sh
