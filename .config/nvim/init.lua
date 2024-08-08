@@ -180,12 +180,6 @@ vim.keymap.set('n', '<C-b>l', '<cmd>bn<cr>', { desc = 'Goto next buffer' })
 vim.keymap.set('n', '<C-b>k', '<cmd>tabp<cr>', { desc = 'Goto previous tab' })
 vim.keymap.set('n', '<C-b>j', '<cmd>tabn<cr>', { desc = 'Goto next tab' })
 
-vim.keymap.set('n', '<C-b>d', '<cmd>BufDel<cr>', { desc = 'Delete current buffer' })
-vim.keymap.set('n', '<C-b>D', '<cmd>BufDel!<cr>', { desc = 'Delete current buffer (force)' })
-
-vim.keymap.set('n', '<C-b>o', '<cmd>BufDelOthers<cr>', { desc = 'Delete all but current buffer' })
-vim.keymap.set('n', '<C-b>O', '<cmd>BufDelOthers!<cr>', { desc = 'Delete all but current buffer (force)' })
-
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
