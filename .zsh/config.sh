@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# VI bindings in zsh, sweet...
-bindkey -v
-
 # my own custom scripts and binaries are usually in .bin or .bin/scripts
 export PATH=.bin/scripts:/home/bruno/.bin:$PATH
 

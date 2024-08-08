@@ -101,7 +101,7 @@ vim.g.have_nerd_font = true
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -172,13 +172,19 @@ vim.keymap.set('n', '<leader>cq', vim.diagnostic.setloclist, { desc = 'Open diag
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-vim.keymap.set('n', '<leader>b', function()
-  vim.api.nvim_input('<cmd>b ' .. vim.fn.input 'buffnr: ' .. '<cr>')
-end)
+-- vim.keymap.set('n', '<leader>b', function()
+--   vim.api.nvim_input('<cmd>b ' .. vim.fn.input 'buffnr: ' .. '<cr>')
+-- end)
 vim.keymap.set('n', '<C-b>h', '<cmd>bp<cr>', { desc = 'Goto previous buffer' })
 vim.keymap.set('n', '<C-b>l', '<cmd>bn<cr>', { desc = 'Goto next buffer' })
 vim.keymap.set('n', '<C-b>k', '<cmd>tabp<cr>', { desc = 'Goto previous tab' })
 vim.keymap.set('n', '<C-b>j', '<cmd>tabn<cr>', { desc = 'Goto next tab' })
+
+vim.keymap.set('n', '<C-b>d', '<cmd>BufDel<cr>', { desc = 'Delete current buffer' })
+vim.keymap.set('n', '<C-b>D', '<cmd>BufDel!<cr>', { desc = 'Delete current buffer (force)' })
+
+vim.keymap.set('n', '<C-b>o', '<cmd>BufDelOthers<cr>', { desc = 'Delete all but current buffer' })
+vim.keymap.set('n', '<C-b>O', '<cmd>BufDelOthers!<cr>', { desc = 'Delete all but current buffer (force)' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -538,6 +544,7 @@ require('lazy').setup({
       -- Adds other completion capabilities.
       --  nvim-cmp does not ship with all sources by default. They are split
       --  into multiple repos for maintenance purposes.
+      'hrsh7th/cmp-nvim-lsp-signature-help',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
     },
@@ -609,6 +616,7 @@ require('lazy').setup({
         },
         sources = {
           { name = 'nvim_lsp' },
+          { name = 'nvim_lsp_signature_help' },
           { name = 'luasnip' },
           { name = 'path' },
         },
@@ -741,6 +749,9 @@ require('lazy').setup({
       task = '📌',
       lazy = '💤 ',
     },
+  },
+  rocks = {
+    enabled = false,
   },
 })
 

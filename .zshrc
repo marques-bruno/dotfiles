@@ -1,122 +1,85 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-export LC_ALL="en_US.UTF-8"
+# oh-my-posh prompt customization
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="refined"
+# Set the path to Zinit plugin mgr
+ZINIT_HOME=${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git
 
+# DL Zinit if it's not there yet:
+if [ ! -d "$ZINIT_HOME" ]; then
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-autoload -Uz compinit
-compinit
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
+# Source / load zinit
+source "${ZINIT_HOME}/zinit.zsh"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Emacs-style key bindings
+bindkey -e
+# limit search to what matches what is already typed in prompt
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+## shell integrations
+# Enable fuzzy-search with ^r
+eval "$(fzf --zsh)"
+# Enable zoxide in zsh
+eval "$(zoxide init --cmd cd zsh)"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Add syntax highlighting
+zinit light zsh-users/zsh-syntax-highlighting
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Add zshell completions for various CLI tools
+zinit light zsh-users/zsh-completions
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# Add zshell autosuggestions based on command history
+zinit light zsh-users/zsh-autosuggestions
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# Replace default completion menu with kickass fzf-tab
+zinit light Aloxaf/fzf-tab
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+## COMPLETiONS:
+# Load vanilla completions from zsh-completions
+autoload -U compinit && compinit
+# speedup compinit startup time
+zinit cdreplay -q
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+## Add in extra completion snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::command-not-found
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+## Completion styling
+# case insensitive completions
+zstyle ':completion:*' list-colors "m:{a-z}={A-Za-z}"
+# colored compleitons
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# disable default completion menu (replaced with fzf-tab)
+zstyle ':completion:*' menu no
+# even better autocompletion menu based on fzf-tab
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+# enable completion style with zoxide as well
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+## HISTORY
+# Max nb of entries in history cache
+HISTSIZE=5000
+# History file
+HISTFILE=~/.zsh_history
+# Max nb of entries in history log file 
+SAVEHIST=$HISTSIZE
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# Erase duplicates in history file
+HISTDUP=erase
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textnvim ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-	git
-	themes
-	bgnotify
-	archlinux
-	colored-man-pages
-	colorize
-	command-not-found
-	emoji-clock
-	sudo
-	thefuck
-	tmux
-	zsh-interactive-cd
-)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-export EDITOR='nvim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-
-## Custom shell config
-source ~/.zsh/aliases.sh
-source ~/.zsh/cpp.sh
-source ~/.zsh/extractor.sh
-source ~/.zsh/config.sh
+alias ls='ls --color'
+alias e='nvim'
+alias c='clear'

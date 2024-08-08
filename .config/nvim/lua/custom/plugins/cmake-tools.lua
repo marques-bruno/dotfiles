@@ -6,4 +6,7 @@
 
 return {
   'cdelledonne/vim-cmake',
+  config = function()
+    vim.g.cmake_link_compile_commands = 1
+  end,
 }

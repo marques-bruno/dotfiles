@@ -15,6 +15,10 @@ return {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
 
+    -- Lets you set a lua file in your project repository (.nvim/nvim-dap.lua)
+    -- containing your dap configuration:
+    'ldelossa/nvim-dap-projects',
+
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
 
@@ -83,9 +87,10 @@ return {
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+    -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_breakpoint['dapui_config'] = dapui.open
 
     -- Install golang specific config
     require('dap-go').setup {
@@ -95,5 +100,7 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+    -- Instruct nvim-dap to look for project debug config in workspace's nvim-dap.lua
+    require('nvim-dap-projects').search_project_config()
   end,
 }
