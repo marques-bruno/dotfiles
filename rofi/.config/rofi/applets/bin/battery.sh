@@ -10,10 +10,10 @@ source "$HOME"/.config/rofi/applets/shared/theme.bash
 theme="$type/$style"
 
 # Battery Info
-battery="`acpi -b | cut -d',' -f1 | cut -d':' -f1`"
-status="`acpi -b | cut -d',' -f1 | cut -d':' -f2 | tr -d ' '`"
-percentage="`acpi -b | cut -d',' -f2 | tr -d ' ',\%`"
-time="`acpi -b | cut -d',' -f3`"
+battery="`acpi -b | head -n1 | cut -d',' -f1 | cut -d':' -f1`"
+status="`acpi -b | head -n1 | cut -d',' -f1 | cut -d':' -f2 | tr -d ' '`"
+percentage="`acpi -b | head -n1 | cut -d',' -f2 | tr -d ' ',\%`"
+time="`acpi -b | head -n1 | cut -d',' -f3`"
 
 if [[ -z "$time" ]]; then
 	time=' Fully Charged'
@@ -110,7 +110,7 @@ run_cmd() {
 	elif [[ "$1" == '--opt3' ]]; then
 		xfce4-power-manager-settings
 	elif [[ "$1" == '--opt4' ]]; then
-		${polkit_cmd} alacritty -e powertop
+		${polkit_cmd} kitty -e powertop
 	fi
 }
 
