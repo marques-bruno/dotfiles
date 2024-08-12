@@ -87,6 +87,11 @@ function show_brightness_notif {
 
 # Main function - Takes user input, "volume_up", "volume_down", "brightness_up", or "brightness_down"
 case $1 in
+    volume_get)
+    volume=$(get_speaker_mute)
+    get_speaker_icon
+    echo "$volume_icon  $volume%"
+    ;;
     volume_up)
     # Unmutes and increases volume, then displays the notification
     pactl set-sink-mute @DEFAULT_SINK@ 0
@@ -111,9 +116,20 @@ case $1 in
     show_speaker_notif
     ;;
 
+    mic_get)
+    volume=$(get_mic_mute)
+    get_mic_icon
+    echo "$mic_icon  $volume"
+    ;;
     mic_mute)
     pactl set-source-mute @DEFAULT_SOURCE@ toggle
     show_mic_notif
+    ;;
+
+    brightness_get)
+    brightness=$(get_brightness)
+    get_brightness_icon
+    echo "$brightness_icon  $brightness%"
     ;;
     brightness_up)
     # Increases brightness and displays the notification
