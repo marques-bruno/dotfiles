@@ -220,7 +220,7 @@ require('lazy').setup({
     name = 'catppuccin',
     priority = 1000,
     opts = {
-      -- transparent_background = true,
+      transparent_background = true,
       custom_highlights = function(C)
         return {
           NeoTreeWinSeparator = { fg = C.base, bg = C.base },
