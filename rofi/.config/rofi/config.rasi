@@ -83,7 +83,7 @@ configuration {
 
 	/*---------- Misc setting ----------*/
 	terminal: "rofi-sensible-terminal";
-	font: "Mono 12";
+	font: "FiraCode Nerd Font Reg 10";
 	sort: false;
 	threads: 0;
 	click-to-exit: true;
@@ -179,3 +179,5 @@ configuration {
 	me-accept-custom: "Control+MouseDPrimary";
 */
 }
+@theme "/home/bruno/.local/share/rofi/themes/catppuccin-mocha.rasi"
+
