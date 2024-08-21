@@ -15,6 +15,7 @@ polybar_cmd () {
   polybar time& sleep $sleeptime
   polybar soundctl& sleep $sleeptime
   polybar networkctl& sleep $sleeptime
+  polybar battery& sleep $sleeptime
   polybar powerctl&
 }
 
