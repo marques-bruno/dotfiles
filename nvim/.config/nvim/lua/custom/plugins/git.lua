@@ -1,4 +1,5 @@
 return {
+  -- IF YOU GET AN ERROR SUCH AS "ERROR DETECTED WHILE PROCESSING BufREadPost....., run :TSUpdate tree-sitter-gitcommit in a new nvim session and restart nvim
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
