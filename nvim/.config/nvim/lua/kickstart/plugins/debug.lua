@@ -7,17 +7,14 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
   event = 'VeryLazy',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
-    -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
 
     -- Lets you set a lua file in your project repository (.nvim/nvim-dap.lua)
     -- containing your dap configuration:
-    'ldelossa/nvim-dap-projects',
+    -- 'ldelossa/nvim-dap-projects',
 
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
@@ -27,8 +24,8 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
     'mfussenegger/nvim-dap-python',
+    'julianolf/nvim-dap-lldb',
   },
   config = function()
     local dap = require 'dap'
@@ -48,17 +45,17 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'python',
-        'cpp',
+	'codelldb',
       },
     }
 
     -- Basic debugging keymaps, feel free to change to your liking!
-    vim.keymap.set('n', '<leader>Dc', dap.continue, { desc = '▶/⏸ Start/[C]ontinue' })
-    vim.keymap.set('n', '<leader>Di', dap.step_into, { desc = '⏎ Step [I]nto' })
-    vim.keymap.set('n', '<leader>Do', dap.step_over, { desc = '⏭ Step [O]ver' })
-    vim.keymap.set('n', '<leader>DO', dap.step_out, { desc = '⏮ Step [O]ut' })
-    vim.keymap.set('n', '<leader>Db', dap.toggle_breakpoint, { desc = 'Toggle [B]reakpoint' })
-    vim.keymap.set('n', '<leader>DB', function()
+    vim.keymap.set('n', '<leader>dc', dap.continue, { desc = '▶/⏸ Start/[C]ontinue' })
+    vim.keymap.set('n', '<leader>di', dap.step_into, { desc = '⏎ Step [I]nto' })
+    vim.keymap.set('n', '<leader>do', dap.step_over, { desc = '⏭ Step [O]ver' })
+    vim.keymap.set('n', '<leader>dO', dap.step_out, { desc = '⏮ Step [O]ut' })
+    vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Toggle [B]reakpoint' })
+    vim.keymap.set('n', '<leader>dB', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Set [B]reakpoint' })
 
@@ -85,22 +82,62 @@ return {
     }
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
+    vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Toggle DAP UI' })
 
-    -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
     -- dap.listeners.before.event_breakpoint['dapui_config'] = dapui.open
 
-    -- Install golang specific config
-    require('dap-go').setup {
-      delve = {
-        -- On Windows delve must be run attached or it crashes.
-        -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        detached = vim.fn.has 'win32' == 0,
+    -- Instruct nvim-dap to look for project debug config in workspace's nvim-dap.lua
+    -- require('nvim-dap-projects').search_project_config()
+
+    -- DAP-PYTHON config
+    local venv = os.getenv 'VIRTUAL_ENV' or os.getenv 'CONDA_DEFAULT_ENV' or 'NO_VENV'
+    require('dap-python').setup(venv .. '/bin/python')
+    require('dap-python').test_runner = 'pytest'
+
+    vim.keymap.set('n', '<leader>Dt', function()
+      require('dap-python').test_method()
+    end, { desc = 'Debug Python Test method' })
+    -- FIX working directory for python debugger:
+    dap.configurations.python = {
+      {
+        name = 'Python: Launch file',
+        type = 'python',
+        console = 'integratedTerminal',
+        request = 'launch',
+        program = '${file}',
+        cwd = '${workspaceFolder}',
+      },
+      {
+        name = 'Python: Launch file with arguments',
+        type = 'python',
+        console = 'integratedTerminal',
+        request = 'launch',
+        program = '${file}',
+        cwd = '${workspaceFolder}',
+        args = function()
+          local text = vim.fn.input 'Arguments: '
+          return Extract_args(text)
+        end,
       },
     }
-    -- Instruct nvim-dap to look for project debug config in workspace's nvim-dap.lua
-    require('nvim-dap-projects').search_project_config()
+
+    local cfg = {
+      configurations = {
+        -- C lang configurations
+        cpp = {
+          {
+            name = 'C++: a.out',
+            type = 'lldb',
+            request = 'launch',
+            cwd = '${workspaceFolder}',
+            program = 'a.out'
+          },
+        },
+      },
+    }
+    require('dap-lldb').setup(cfg)
   end,
 }

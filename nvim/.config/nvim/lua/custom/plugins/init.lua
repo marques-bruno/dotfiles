@@ -33,4 +33,54 @@ vim.api.nvim_create_user_command('CdGitRoot', cd_to_git_or_parent_dir, {
   desc = 'Cd to git root or parent dir',
 })
 
+local function dump(o)
+  if type(o) == 'table' then
+    local s = '{ '
+
+    for k, v in pairs(o) do
+      if type(k) ~= 'number' then
+        k = '"' .. k .. '"'
+      end
+      s = s .. '[' .. k .. '] = ' .. dump(v) .. ','
+    end
+    return s .. '} '
+  else
+    return tostring(o)
+  end
+end
+
+function Show_dap_config(lang)
+  local dap = require 'dap'
+  for k, v in pairs(dap.configurations[lang]) do
+    print(dump(v))
+  end
+end
+
+vim.api.nvim_create_user_command('DapShow', Show_dap_config, { desc = 'Display the nvim-dap configuration for a given adapter' })
+
+-- A function that tokenizes text as it would be done in a shell:
+function Extract_args(text)
+  local args = {}
+  local spat, epat, buf, quoted = [=[^(['"])]=], [=[(['"])$]=]
+  for str in text:gmatch '%S+' do
+    local squoted = str:match(spat)
+    local equoted = str:match(epat)
+    local escaped = str:match [=[(\*)['"]$]=]
+    if squoted and not quoted and not equoted then
+      buf, quoted = str, squoted
+    elseif buf and equoted == quoted and #escaped % 2 == 0 then
+      str, buf, quoted = buf .. ' ' .. str, nil, nil
+    elseif buf then
+      buf = buf .. ' ' .. str
+    end
+    if not buf then
+      table.insert(args, (str:gsub(spat, ''):gsub(epat, '')))
+    end
+  end
+  if buf then
+    print('Missing matching quote for ' .. buf)
+  end
+  return args
+end
+
 return {}
