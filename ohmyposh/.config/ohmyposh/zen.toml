@@ -35,6 +35,18 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   type = 'rprompt'
   overflow = 'hidden'
 
+ [[blocks.segments]]
+    type = 'python'
+    style = 'plain'
+    foreground = "green"
+    background = 'transparent'
+    template = '{{ if .Venv }}({{ .Venv }})  {{ end }}'
+
+    [blocks.segments.properties]
+      display_mode = "environment"
+      fetch_virtual_env = true
+      home_enabled = true
+
   [[blocks.segments]]
     type = 'executiontime'
     style = 'plain'
@@ -45,6 +57,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     [blocks.segments.properties]
       threshold = 5000
 
+ 
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
