@@ -1,9 +1,3 @@
---[[
-@author		: Bruno MARQUES (bmarques68@gmail.com)
-@created	: 18/07/2024
-@filename	: oil.lua
-]]
-
 return {
   'stevearc/oil.nvim',
   opts = {},
@@ -24,5 +18,7 @@ return {
         wrap = true,
       },
     }
+
+    vim.keymap.set('n', '-', require('oil').toggle_float, { desc = "Open Oil" })
   end,
 }

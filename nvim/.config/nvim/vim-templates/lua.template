@@ -1,9 +1,0 @@
---[[
-@author		: {{NAME}} ({{EMAIL}})
-@created	: {{TODAY}}
-@filename	: {{FILEE}}
-]]
-
-return {
-
-}
